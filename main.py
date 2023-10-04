@@ -31,7 +31,7 @@ pprint(len(hommes))
 
 ################################################################################
 
-# je peux aussi l'écrire avec un boucle classique
+# je peux aussi l'écrire avec une boucle classique
 hommes2 = []                        # un tableau vide
 for person in people:               # pour chaque persone du tableau
     if person["gender"] == "Male":  # si c'est un homme (2-266-02250-4)
@@ -51,6 +51,7 @@ print(nb_hommes)
 ################################################################################
 
 print(colored("Nombre de femmes : ", 'yellow'))
+# je peux compter les femmes ou calculer : nombre d'élement dans people - nombre d'homme
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 
 ################################################################################
@@ -71,11 +72,13 @@ print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 ################################################################################
 
 print(colored("Nombre de personnes qui aiment les Drama :", 'yellow'))
+# là il va falloir regarder si le chaine de charactères "Drama" se trouve dans "pref_movie"
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 
 ################################################################################
 
 print(colored("Nombre de femmes qui aiment la science-fiction :", 'yellow'))
+# si j'ai déjà un tableau avec toutes les femmes, je peux chercher directement dedans ;)
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 
 ################################################################################
