@@ -340,6 +340,9 @@ for person in people:
         latitude = person["latitude"]
         longitude = person["longitude"]
 
+        if latitude == josee_latitude and longitude == josee_longitude:
+            continue  
+
         # calcul de la distance approximative
         distance = math.sqrt((latitude - josee_latitude) ** 2 + (longitude - josee_longitude) ** 2)
         distances.append((distance, person))
@@ -539,6 +542,13 @@ if ages_hommes_films_noirs:
 print(colored("Age moyen des femmes qui aiment les drames et habitent sur le fuseau horaire, de Paris : ", 'yellow'))
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 
+#aujourdhui = datetime.now()
+#ages_femmes_drames_paris = []
+#for person in people:
+    #if person["gender"] == "Female" and "drama" in person["pref_movie"]:
+
+
+
 ################################################################################
 
 print(colored("""Homme qui cherche un homme et habite le plus proche d'un homme qui a au moins une
@@ -549,6 +559,19 @@ print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 
 print(colored("Liste des couples femmes / hommes qui ont les même préférences de films :", 'yellow'))
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+
+#hommes = [person for person in people if person["gender"] == "Male"]
+#femmes = [person for person in people if person["gender"] == "Female"]
+
+#couples_femmes_hommes = []
+
+#for femme in femmes:  
+    #for homme in hommes:  
+        #if femme["pref_movie"] == homme["pref_movie"]:  
+            #couples_femmes_hommes.append((femme, homme))
+#for femme, homme in couples_femmes_hommes:
+    #print(f"Couple trouvé : {femme['first_name']}  et {homme['first_name']})")
+
 
 ################################################################################
 
