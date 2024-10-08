@@ -222,7 +222,7 @@ if salaires:
 ################################################################################
 
 print(colored("Nombre de personnes qui habitent dans l'hémisphère nord :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
 
 nb_pers_hnord = 0
 for person in people:
