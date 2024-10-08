@@ -52,34 +52,70 @@ print(nb_hommes)
 
 print(colored("Nombre de femmes : ", 'yellow'))
 # je peux compter les femmes ou calculer : nombre d'élement dans people - nombre d'homme
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
-
+print(colored('DONE', 'red', 'on_green'))
+nb_femmes = 0                      
+for person in people:               
+    if person["gender"] == "Female": 
+        nb_femmes = nb_femmes + 1  
+print(nb_femmes)
 ################################################################################
 
 print(colored("Nombre de personnes qui cherchent un homme :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
-
+print(colored('DONE', 'red', 'on_green'))
+nb_cherche_homme = 0 
+for person in people:  
+    if "looking_for" in person and person["looking_for"] == "M": 
+        nb_cherche_homme += 1  
+print(nb_cherche_homme)
 ################################################################################
 
 print(colored("Nombre de personnes qui cherchent une femme :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
 
+nb_cherche_femme = 0
+for person in people: 
+    if "looking_for" in person and person["looking_for"] == "F":  
+        nb_cherche_femme += 1  
+print(nb_cherche_femme)
 ################################################################################
 
 print(colored("Nombre de personnes qui gagnent plus de 2000$ :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+nb_plus_2000 = 0
+
+for person in people:  
+    if "income" in person:  
+        # On enlève le signe dollar et on convertit la chaîne en float
+        income = float(person["income"].replace('$', '').replace(',', ''))
+        if income > 2000:  
+            nb_plus_2000 += 1  
+print(nb_plus_2000)
+
 
 ################################################################################
 
 print(colored("Nombre de personnes qui aiment les Drama :", 'yellow'))
 # là il va falloir regarder si le chaine de charactères "Drama" se trouve dans "pref_movie"
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+nb_drama_fans = 0
+for person in people:
+    if 'pref_movie' in person and 'drama' in person['pref_movie'].lower():  
+        nb_drama_fans += 1  
+print(nb_drama_fans)
+       
+
 
 ################################################################################
 
 print(colored("Nombre de femmes qui aiment la science-fiction :", 'yellow'))
 # si j'ai déjà un tableau avec toutes les femmes, je peux chercher directement dedans ;)
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+nb_femmes_scifi = 0
+for person in people:  
+    if "gender" in person and person["gender"] == "Female":  
+        if 'pref_movie' in person and 'sci-fi' in person['pref_movie'].lower():  
+            nb_femmes_scifi += 1  
+print(nb_femmes_scifi)
 
 ################################################################################
 
@@ -88,17 +124,56 @@ print(colored('LEVEL 2' + ''.join(['_' for _ in range(73)]), 'green', 'on_green'
 ################################################################################
 
 print(colored("Nombre de personnes qui aiment les documentaires et gagnent plus de 1482$", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
 
+nb_docu_plus_1482 = 0
+for person in people:  
+    if 'pref_movie' in person and 'documentary' in person['pref_movie'].lower():  
+        if "income" in person: 
+             income = float(person["income"].replace('$', '').replace(',', ''))
+        if income > 1482: 
+                nb_docu_plus_1482 += 1  
+print(nb_docu_plus_1482)
 ################################################################################
 
 print(colored("Liste des noms, prénoms, id et revenus des personnes qui gagnent plus de 4000$", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+nb_plus_4000 = []
+
+for person in people:  
+    if "income" in person:  
+        income = float(person["income"].replace('$', '').replace(',', ''))
+        if income > 4000:  
+            nb_plus_4000.append({
+                "id": person["id"],
+                "first_name": person["first_name"],
+                "last_name": person["last_name"],
+                "income": person["income"]
+            })
+pprint(nb_plus_4000)
+
+
 
 ################################################################################
 
 print(colored("Homme le plus riche (nom et id) :", 'yellow'))
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+
+homme_plus_riche = None  
+max_income = 0  
+
+for person in people:  
+    if "gender" in person and person["gender"] == "Male":  
+        if "income" in person:  
+            income = float(person["income"].replace('$', '').replace(',', ''))  
+            if income > max_income: 
+                max_income = income 
+                homme_plus_riche = person  
+
+
+if homme_plus_riche: 
+    print(f"L'homme le plus riche est {homme_plus_riche['first_name']} {homme_plus_riche['last_name']} (ID: {homme_plus_riche['id']}) avec un revenu de {homme_plus_riche['income']}")
 
 ################################################################################
 
