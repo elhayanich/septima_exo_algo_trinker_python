@@ -1,6 +1,7 @@
 import json
 from pprint import pprint
 import math
+from datetime import datetime
 from termcolor import colored
 
 with open('people.json', 'r') as p:
@@ -328,7 +329,29 @@ if plus_proche_personne:
 ################################################################################
 
 print(colored("les 10 personnes qui habitent les plus près de Josée Boshard (nom et id) :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+josee_latitude = 57.6938555
+josee_longitude = 11.9704401
+
+distances = []
+
+for person in people:
+    if "latitude" in person and "longitude" in person:
+        latitude = person["latitude"]
+        longitude = person["longitude"]
+
+        # Calcul de la distance approximative
+        distance = math.sqrt((latitude - josee_latitude) ** 2 + (longitude - josee_longitude) ** 2)
+        distances.append((distance, person))
+
+# Tri par distance (de la plus petite à la plus grande) et sélection des 10 plus proches
+distances.sort(key=lambda x: x[0])
+closest_people = distances[:10]
+
+print("Les 10 personnes qui habitent le plus près de Josée Boshard :")
+for _, person in closest_people:
+    print(f"{person['first_name']} {person['last_name']} (ID: {person['id']})")
 
 ################################################################################
 
@@ -352,14 +375,84 @@ for employee in google_employees:
 ################################################################################
 
 print(colored("Personne la plus agée :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+personne_plus_agee = None
+age_maximum = -1
+
+# Date actuelle pour le calcul de l'âge
+date_actuelle = datetime.now()
+for person in people:
+    if "date_of_birth" in person:
+        # Convertit la date de naissance en objet datetime
+        date_naissance = datetime.strptime(person["date_of_birth"], "%Y-%m-%d")
+        
+        # Calcule l'âge
+        age = (date_actuelle - date_naissance).days // 365  # Convertit les jours en années
+
+        # Met à jour la personne la plus âgée si l'âge est supérieur à l'âge maximum
+        if age > age_maximum:
+            age_maximum = age
+            personne_plus_agee = person
+if personne_plus_agee:
+    print(f"La personne la plus âgée est {personne_plus_agee['first_name']} {personne_plus_agee['last_name']} (ID: {personne_plus_agee['id']}, Age: {age_maximum} ans).")
 
 ################################################################################
 
 print(colored("Personne la plus jeune :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+personne_plus_jeune = None
+age_minimum = float('inf')  # Initialise à l'infini
+
+# Date actuelle pour le calcul de l'âge
+date_actuelle = datetime.now()
+
+for person in people:
+    if "date_of_birth" in person:
+        date_naissance = datetime.strptime(person["date_of_birth"], "%Y-%m-%d")
+        age = (date_actuelle - date_naissance).days // 365  
+        if age < age_minimum:
+            age_minimum = age
+            personne_plus_jeune = person
+if personne_plus_jeune:
+    print(f"La personne la plus jeune est {personne_plus_jeune['first_name']} {personne_plus_jeune['last_name']} (ID: {personne_plus_jeune['id']}, Age: {age_minimum} ans).")
+
+
+
+################################################################################
+
+
+
+
 print(colored("Moyenne des différences d'age :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+ages = []
+date_actuelle = datetime.now()
+
+for person in people:
+    if "date_of_birth" in person:
+        date_naissance = datetime.strptime(person["date_of_birth"], "%Y-%m-%d")
+        age = (date_actuelle - date_naissance).days // 365  
+        ages.append(age)
+
+# Calculer la moyenne des différences d'âge
+somme_differences = 0
+nombre_de_paires = 0
+
+# Calcul des différences d'âge entre chaque paire de personnes
+for i in range(len(ages)):
+    for j in range(i + 1, len(ages)):
+        difference = abs(ages[i] - ages[j])
+        somme_differences += difference
+        nombre_de_paires += 1
+
+# Calculer la moyenne
+moyenne_diff = somme_differences / nombre_de_paires if nombre_de_paires > 0 else 0
+
+# Affichage de la moyenne des différences d'âge
+print(f"La moyenne des différences d'âge est de {moyenne_diff:.2f} ans.")
 
 ################################################################################
 
