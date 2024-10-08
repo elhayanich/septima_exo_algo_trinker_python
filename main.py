@@ -158,7 +158,7 @@ pprint(nb_plus_4000)
 ################################################################################
 
 print(colored("Homme le plus riche (nom et id) :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
 
 homme_plus_riche = None  
 max_income = 0  
@@ -178,7 +178,20 @@ if homme_plus_riche:
 ################################################################################
 
 print(colored("Salaire moyen :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+total_income = 0
+count = 0
+
+for person in people:  
+    if "income" in person: 
+        income = float(person["income"].replace('$', '').replace(',', ''))
+        total_income += income  
+        count += 1 
+# Calcul du salaire moyen
+if count > 0: 
+    salaire_moyen = total_income / count
+    print(f"Le salaire moyen est de ${salaire_moyen:.2f}")
 
 ################################################################################
 
