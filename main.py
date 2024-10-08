@@ -2,6 +2,7 @@ import json
 from pprint import pprint
 import math
 from datetime import datetime
+from collections import Counter 
 from termcolor import colored
 
 with open('people.json', 'r') as p:
@@ -98,7 +99,6 @@ print(nb_plus_2000)
 ################################################################################
 
 print(colored("Nombre de personnes qui aiment les Drama :", 'yellow'))
-# là il va falloir regarder si le chaine de charactères "Drama" se trouve dans "pref_movie"
 print(colored('DONE', 'red', 'on_green'))
 nb_drama_fans = 0
 for person in people:
@@ -190,7 +190,7 @@ for person in people:
         income = float(person["income"].replace('$', '').replace(',', ''))
         total_income += income  
         count += 1 
-# Calcul du salaire moyen
+
 if count > 0: 
     salaire_moyen = total_income / count
     print(f"Le salaire moyen est de ${salaire_moyen:.2f}")
@@ -204,19 +204,17 @@ salaires = []
 
 for person in people:  
     if "income" in person: 
-        # On enlève le signe dollar et on convertit la chaîne en float
         income = float(person["income"].replace('$', '').replace(',', ''))
         salaires.append(income)  
 
-# Calcul de la médiane
+# calcul de la médiane
 if salaires: 
     salaires.sort()  
     n = len(salaires)  
 
-    # Calcul de la médiane
-    if n % 2 == 1:  # Si le nombre de salaires est impair
+    if n % 2 == 1:  # si le nombre de salaires est impair
         median_salary = salaires[n // 2]
-    else:  # Si le nombre de salaires est pair
+    else:  # si le nombre de salaires est pair
         median_salary = (salaires[n // 2 - 1] + salaires[n // 2]) / 2
 
     print(f"Le salaire médian est de ${median_salary:.2f}")
@@ -242,14 +240,14 @@ total_income_hs = 0
 nb_pers_hs = 0  
 
 for person in people:  
-    if person["latitude"] < 0:  # Vérifie si la personne habite dans l'hémisphère sud
+    if person["latitude"] < 0:  # vérifie si la personne habite dans l'hsud
         if "income" in person:  
             income = float(person["income"].replace('$', '').replace(',', ''))
             total_income_hs += income  
             nb_pers_hs += 1  
 
-# Calcul du salaire moyen
-if nb_pers_hs > 0:  # Vérifie s'il y a au moins une personne dans l'hémisphère sud avec un revenu
+# calcul du salaire moyen
+if nb_pers_hs > 0:  # Vérifie s'il y a au moins une personne dans l'hsud avec un revenu
     salaire_moyen_hs = total_income_hs / nb_pers_hs
     print(f"Le salaire moyen des personnes dans l'hémisphère sud est de ${salaire_moyen_hs:.2f}")
 
@@ -262,7 +260,7 @@ print(colored('LEVEL 3' + ''.join(['_' for _ in range(73)]), 'green', 'on_green'
 print(colored("Personne qui habite le plus près de Bérénice Cawt (nom et id) :", 'yellow'))
 print(colored('DONE', 'red', 'on_green'))
 
-# Coordonnées de Bérénice Cawt
+# coordonnées de Bérénice Cawt
 berenice_latitude = 15.5900396
 berenice_longitude = -87.879523
 
@@ -271,15 +269,15 @@ distance_minimale = float('inf')
 
 for person in people:
     if "latitude" in person and "longitude" in person:
-        # Récupère les coordonnées de la personne
+        # récupère les coordonnées de la personne
         latitude = person["latitude"]
         longitude = person["longitude"]
 
-        # Vérifie que la personne n'est pas Bérénice Cawt elle-même et ignore 
+        # vérif que la personne n'est pas Bérénice Cawt elle-même et ignore 
         if latitude == berenice_latitude and longitude == berenice_longitude:
             continue  
 
-        # Calcul de la distance approximative et faut importer the math module
+        # calcul de la distance approximative et faut importer the math module
         distance = math.sqrt((latitude - berenice_latitude) ** 2 + (longitude - berenice_longitude) ** 2)
 
         # maj de la personne la plus proche si la distance est inférieure à la distance minimale
@@ -305,7 +303,7 @@ distance_minimale = float('inf')
 
 for person in people:
     if "latitude" in person and "longitude" in person:
-        # Récupère les coordonnées de la personne
+        # récupère les coordonnées de la pers
         latitude = person["latitude"]
         longitude = person["longitude"]
 
@@ -313,7 +311,7 @@ for person in people:
         if latitude == rui_latitude and longitude == rui_longitude:
             continue  
 
-        # Calcul de la distance approximative et faut importer the math module
+        # calcul de la distance approximative et faut importer the math module
         distance = math.sqrt((latitude - rui_latitude) ** 2 + (longitude - rui_longitude) ** 2)
 
         # maj de la personne la plus proche si la distance est inférieure à la distance minimale
@@ -341,11 +339,11 @@ for person in people:
         latitude = person["latitude"]
         longitude = person["longitude"]
 
-        # Calcul de la distance approximative
+        # calcul de la distance approximative
         distance = math.sqrt((latitude - josee_latitude) ** 2 + (longitude - josee_longitude) ** 2)
         distances.append((distance, person))
 
-# Tri par distance (de la plus petite à la plus grande) et sélection des 10 plus proches
+# tri par distance (de la plus petite à la plus grande) et sélection des 10 plus proches
 distances.sort(key=lambda x: x[0])
 closest_people = distances[:10]
 
@@ -380,17 +378,17 @@ print(colored('DONE', 'red', 'on_green'))
 personne_plus_agee = None
 age_maximum = -1
 
-# Date actuelle pour le calcul de l'âge
+# date actuelle pour le calcul de lage
 date_actuelle = datetime.now()
 for person in people:
     if "date_of_birth" in person:
-        # Convertit la date de naissance en objet datetime
+        # convertit la date de naissance en objet datetime
         date_naissance = datetime.strptime(person["date_of_birth"], "%Y-%m-%d")
         
         # Calcule l'âge
-        age = (date_actuelle - date_naissance).days // 365  # Convertit les jours en années
+        age = (date_actuelle - date_naissance).days // 365  # convertit les jours en années
 
-        # Met à jour la personne la plus âgée si l'âge est supérieur à l'âge maximum
+        # maj de la personne la plus agée si lage est supérieur à lage maximum
         if age > age_maximum:
             age_maximum = age
             personne_plus_agee = person
@@ -405,7 +403,7 @@ print(colored('DONE', 'red', 'on_green'))
 personne_plus_jeune = None
 age_minimum = float('inf')  # Initialise à l'infini
 
-# Date actuelle pour le calcul de l'âge
+#actual date pour le calcul de lage
 date_actuelle = datetime.now()
 
 for person in people:
@@ -437,11 +435,12 @@ for person in people:
         age = (date_actuelle - date_naissance).days // 365  
         ages.append(age)
 
-# Calculer la moyenne des différences d'âge
+# calculer la moyenne des différences dage
 somme_differences = 0
 nombre_de_paires = 0
 
-# Calcul des différences d'âge entre chaque paire de personnes
+
+#calcul les différences dage entre chaque partie de pers
 for i in range(len(ages)):
     for j in range(i + 1, len(ages)):
         difference = abs(ages[i] - ages[j])
@@ -450,8 +449,6 @@ for i in range(len(ages)):
 
 # Calculer la moyenne
 moyenne_diff = somme_differences / nombre_de_paires if nombre_de_paires > 0 else 0
-
-# Affichage de la moyenne des différences d'âge
 print(f"La moyenne des différences d'âge est de {moyenne_diff:.2f} ans.")
 
 ################################################################################
@@ -460,15 +457,60 @@ print(colored('LEVEL 4' + ''.join(['_' for _ in range(73)]), 'green', 'on_green'
 print(colored("Genre de film le plus populaire :", 'yellow'))
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 
+
+pref_movie_list = []
+
+# extraire les prefs de films
+for person in people:
+    if "pref_movie" in person:
+        genres = person["pref_movie"].split('|')  # sépare les genres 
+        pref_movie_list.extend(genres)  # ajoute les genres à la liste
+
+# compter les occurrences de chaque genre
+genre_counts = Counter(pref_movie_list)
+
+# trouver le genre le plus popular
+genre_populaire = genre_counts.most_common(1)  # Renvoie le genre le plus fréquent
+if genre_populaire:
+    genre, count = genre_populaire[0]
+    print(f"Le genre de film le plus populaire est '{genre}' avec {count} occurrences.")
+
 ################################################################################
 
 print(colored("Genres de film par ordre de popularité :", 'yellow'))
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 
+pref_movie_list = []
+
+for person in people:
+    if "pref_movie" in person:
+        genres = person["pref_movie"].split('|')  
+        pref_movie_list.extend(genres)  
+# Compter les occurrences de chaque genre
+genre_counts = Counter(pref_movie_list)
+
+# Tri de genres par ordre de popularité
+genres_tries = genre_counts.most_common()
+print("Genres de film par ordre de popularité :")
+for genre, count in genres_tries:
+    print(f"{genre}: {count} occurrences")
+
 ################################################################################
 
 print(colored("Liste des genres de film et nombre de personnes qui les préfèrent :", 'yellow'))
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+ 
+pref_movie_list = []
+
+for person in people:
+    if "pref_movie" in person:
+        genres = person["pref_movie"].split('|')  
+        pref_movie_list.extend(genres) 
+genre_counts = Counter(pref_movie_list)
+print("Genres de film et nombre de personnes qui les préfèrent :")
+for genre, count in genre_counts.items():
+    print(f"{genre}: {count} personne(s)")
+
 
 ################################################################################
 
