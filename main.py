@@ -3,6 +3,7 @@ from pprint import pprint
 import math
 from datetime import datetime
 from collections import Counter 
+from statistics import mean
 from termcolor import colored
 
 with open('people.json', 'r') as p:
@@ -455,7 +456,7 @@ print(f"La moyenne des différences d'âge est de {moyenne_diff:.2f} ans.")
 
 print(colored('LEVEL 4' + ''.join(['_' for _ in range(73)]), 'green', 'on_green'))
 print(colored("Genre de film le plus populaire :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
 
 
 pref_movie_list = []
@@ -478,7 +479,7 @@ if genre_populaire:
 ################################################################################
 
 print(colored("Genres de film par ordre de popularité :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
 
 pref_movie_list = []
 
@@ -498,7 +499,7 @@ for genre, count in genres_tries:
 ################################################################################
 
 print(colored("Liste des genres de film et nombre de personnes qui les préfèrent :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
  
 pref_movie_list = []
 
@@ -515,7 +516,23 @@ for genre, count in genre_counts.items():
 ################################################################################
 
 print(colored("Age moyen des hommes qui aiment les films noirs :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+aujourdhui = datetime.now()
+ages_hommes_films_noirs = []
+
+for person in people:
+    # Filtrer les hommes qui aiment les films noirs
+    if person["gender"] == "Male" and "Film-Noir" in person["pref_movie"]:
+        # Calculer l'âge
+        date_naissance = datetime.strptime(person["date_of_birth"], "%Y-%m-%d")
+        age = aujourdhui.year - date_naissance.year - ((aujourdhui.month, aujourdhui.day) < (date_naissance.month, date_naissance.day))
+        ages_hommes_films_noirs.append(age)
+
+# Calculer l'âge moyen
+if ages_hommes_films_noirs:
+    age_moyen = mean(ages_hommes_films_noirs)
+    print(f"L'âge moyen des hommes qui aiment les films noirs est de {age_moyen:.2f} ans.")
 
 ################################################################################
 
