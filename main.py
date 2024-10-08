@@ -1,5 +1,6 @@
 import json
 from pprint import pprint
+import math
 from termcolor import colored
 
 with open('people.json', 'r') as p:
@@ -258,12 +259,71 @@ print(colored('LEVEL 3' + ''.join(['_' for _ in range(73)]), 'green', 'on_green'
 ################################################################################
 
 print(colored("Personne qui habite le plus près de Bérénice Cawt (nom et id) :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+# Coordonnées de Bérénice Cawt
+berenice_latitude = 15.5900396
+berenice_longitude = -87.879523
+
+plus_proche_personne = None
+distance_minimale = float('inf') 
+
+for person in people:
+    if "latitude" in person and "longitude" in person:
+        # Récupère les coordonnées de la personne
+        latitude = person["latitude"]
+        longitude = person["longitude"]
+
+        # Vérifie que la personne n'est pas Bérénice Cawt elle-même et ignore 
+        if latitude == berenice_latitude and longitude == berenice_longitude:
+            continue  
+
+        # Calcul de la distance approximative et faut importer the math module
+        distance = math.sqrt((latitude - berenice_latitude) ** 2 + (longitude - berenice_longitude) ** 2)
+
+        # maj de la personne la plus proche si la distance est inférieure à la distance minimale
+        if distance < distance_minimale:
+            distance_minimale = distance
+            plus_proche_personne = person
+if plus_proche_personne:
+    print(f"La personne qui habite le plus près de Bérénice Cawt est {plus_proche_personne['first_name']} {plus_proche_personne['last_name']} (ID: {plus_proche_personne['id']}).")
+
+
 
 ################################################################################
 
 print(colored("Personne qui habite le plus près de Ruì Brach (nom et id) :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+# Coordonnées de Rui Brach
+rui_latitude = 33.347316
+rui_longitude = 120.16366
+
+plus_proche_personne = None
+distance_minimale = float('inf') 
+
+for person in people:
+    if "latitude" in person and "longitude" in person:
+        # Récupère les coordonnées de la personne
+        latitude = person["latitude"]
+        longitude = person["longitude"]
+
+        # Vérifie que la personne n'est pas rui himself et ignore 
+        if latitude == rui_latitude and longitude == rui_longitude:
+            continue  
+
+        # Calcul de la distance approximative et faut importer the math module
+        distance = math.sqrt((latitude - rui_latitude) ** 2 + (longitude - rui_longitude) ** 2)
+
+        # maj de la personne la plus proche si la distance est inférieure à la distance minimale
+        if distance < distance_minimale:
+            distance_minimale = distance
+            plus_proche_personne = person
+if plus_proche_personne:
+    print(f"La personne qui habite le plus près de rui brach est {plus_proche_personne['first_name']} {plus_proche_personne['last_name']} (ID: {plus_proche_personne['id']}).")
+
+
+
 
 ################################################################################
 
