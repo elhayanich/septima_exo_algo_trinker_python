@@ -196,7 +196,7 @@ if count > 0:
 ################################################################################
 
 print(colored("Salaire médian :", 'yellow'))
-print(colored('DONE', 'red', 'green'))
+print(colored('DONE', 'red', 'on_green'))
 
 salaires = []
 
@@ -211,6 +211,7 @@ if salaires:
     salaires.sort()  
     n = len(salaires)  
 
+    # Calcul de la médiane
     if n % 2 == 1:  # Si le nombre de salaires est impair
         median_salary = salaires[n // 2]
     else:  # Si le nombre de salaires est pair
@@ -222,6 +223,13 @@ if salaires:
 
 print(colored("Nombre de personnes qui habitent dans l'hémisphère nord :", 'yellow'))
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+
+nb_pers_hnord = 0
+for person in people:
+    if person["latitude"] > 0:
+        nb_pers_hnord += 1
+
+print(nb_pers_hnord)
 
 ################################################################################
 
