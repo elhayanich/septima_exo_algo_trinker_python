@@ -234,7 +234,22 @@ print(nb_pers_hnord)
 ################################################################################
 
 print(colored("Salaire moyen des personnes qui habitent dans l'hémisphère sud :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+total_income_hs = 0  
+nb_pers_hs = 0  
+
+for person in people:  
+    if person["latitude"] < 0:  # Vérifie si la personne habite dans l'hémisphère sud
+        if "income" in person:  
+            income = float(person["income"].replace('$', '').replace(',', ''))
+            total_income_hs += income  
+            nb_pers_hs += 1  
+
+# Calcul du salaire moyen
+if nb_pers_hs > 0:  # Vérifie s'il y a au moins une personne dans l'hémisphère sud avec un revenu
+    salaire_moyen_hs = total_income_hs / nb_pers_hs
+    print(f"Le salaire moyen des personnes dans l'hémisphère sud est de ${salaire_moyen_hs:.2f}")
 
 ################################################################################
 
