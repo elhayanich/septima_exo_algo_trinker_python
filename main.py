@@ -559,18 +559,17 @@ print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 
 print(colored("Liste des couples femmes / hommes qui ont les même préférences de films :", 'yellow'))
 print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+hommes = [person for person in people if person["gender"] == "Male"]
+femmes = [person for person in people if person["gender"] == "Female"]
 
-#hommes = [person for person in people if person["gender"] == "Male"]
-#femmes = [person for person in people if person["gender"] == "Female"]
+couples_femmes_hommes = []
 
-#couples_femmes_hommes = []
-
-#for femme in femmes:  
-    #for homme in hommes:  
-        #if femme["pref_movie"] == homme["pref_movie"]:  
-            #couples_femmes_hommes.append((femme, homme))
-#for femme, homme in couples_femmes_hommes:
-    #print(f"Couple trouvé : {femme['first_name']}  et {homme['first_name']})")
+for femme in femmes:  
+    for homme in hommes:  
+        if femme["pref_movie"] == homme["pref_movie"]:  
+            couples_femmes_hommes.append((femme, homme))
+for femme, homme in couples_femmes_hommes:
+    print(f"Couple trouvé : {femme['first_name']}  {femme['gender']}   et {homme['first_name']} {homme['gender']} )")
 
 
 ################################################################################
