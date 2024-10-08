@@ -333,7 +333,21 @@ print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
 ################################################################################
 
 print(colored("Les noms et ids des 23 personnes qui travaillent chez google :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'on_green'))
+
+
+google_employees = []
+
+for person in people:
+    if "google" in person["email"].lower():  #verif de l'email if it contains google 
+        google_employees.append({
+            "first_name": person["first_name"],
+            "last_name": person["last_name"],
+            "id": person["id"]
+        })
+print("Les personnes qui travaillent chez Google :")
+for employee in google_employees:
+    print(f"{employee['first_name']} {employee['last_name']} (ID: {employee['id']})")
 
 ################################################################################
 
