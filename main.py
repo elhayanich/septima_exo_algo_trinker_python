@@ -196,7 +196,27 @@ if count > 0:
 ################################################################################
 
 print(colored("Salaire médian :", 'yellow'))
-print(colored('A IMPLEMENTER', 'red', 'on_yellow'))
+print(colored('DONE', 'red', 'green'))
+
+salaires = []
+
+for person in people:  
+    if "income" in person: 
+        # On enlève le signe dollar et on convertit la chaîne en float
+        income = float(person["income"].replace('$', '').replace(',', ''))
+        salaires.append(income)  
+
+# Calcul de la médiane
+if salaires: 
+    salaires.sort()  
+    n = len(salaires)  
+
+    if n % 2 == 1:  # Si le nombre de salaires est impair
+        median_salary = salaires[n // 2]
+    else:  # Si le nombre de salaires est pair
+        median_salary = (salaires[n // 2 - 1] + salaires[n // 2]) / 2
+
+    print(f"Le salaire médian est de ${median_salary:.2f}")
 
 ################################################################################
 
